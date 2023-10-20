@@ -68,6 +68,13 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '17'
+        architecture: x64
+    - name: Cache Maven packages
+      uses: actions/cache@v3.3.1
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2-
 
     - name: Build Code
       if: matrix.language == 'java-kotlin'
